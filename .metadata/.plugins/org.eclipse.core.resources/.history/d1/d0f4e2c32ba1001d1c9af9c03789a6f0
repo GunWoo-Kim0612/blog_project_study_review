@@ -1,0 +1,5 @@
+package com.gwk.review.model;
+
+public class User {
+
+}

@@ -1,0 +1,5 @@
+let index = {
+		
+};
+
+index.init();

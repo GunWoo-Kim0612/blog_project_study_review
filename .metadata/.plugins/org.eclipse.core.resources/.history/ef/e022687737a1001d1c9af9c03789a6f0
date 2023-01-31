@@ -1,0 +1,48 @@
+package com.gwk.review.model;
+
+import java.sql.Timestamp;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+public class Reply {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(length = 200,nullable = true)
+	private String content;
+	
+	//좋아요
+	@ColumnDefault("0")
+	private int count;
+	
+	@CreationTimestamp
+	private Timestamp createDate;
+	
+	@ManyToOne	//게시글 하나에 여러개 댓글 
+	@JoinColumn
+	private Board board;
+	
+	private User user;
+}

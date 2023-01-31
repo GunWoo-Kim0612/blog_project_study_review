@@ -1,0 +1,10 @@
+package com.gwk.review.test;
+
+import org.springframework.web.bind.annotation.GetMapping;
+
+public class ControllerTest {
+	@GetMapping("/")
+	public String home() {
+		return "index.jsp";
+	}
+}

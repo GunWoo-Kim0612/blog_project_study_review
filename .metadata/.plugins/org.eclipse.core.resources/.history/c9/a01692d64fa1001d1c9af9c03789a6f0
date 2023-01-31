@@ -1,0 +1,22 @@
+package com.gwk.review.controller.api.user;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gwk.review.model.User;
+import com.gwk.review.repository.UserRepository;
+
+@RestController
+public class UserApiController {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@PostMapping("/auth/joinProc")
+	public String joinTest() {
+		System.out.println("joinTest함수 실행");
+		
+		return "ajaxTest";
+	}
+}

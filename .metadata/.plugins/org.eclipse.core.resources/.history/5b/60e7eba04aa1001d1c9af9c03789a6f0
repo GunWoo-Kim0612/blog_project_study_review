@@ -1,0 +1,16 @@
+package com.gwk.review.test;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class DummyControllerTest {
+
+	@PostMapping("/dummy/join")
+	public String join() {
+		
+		
+		
+		return "회원가입완료";
+	}
+}

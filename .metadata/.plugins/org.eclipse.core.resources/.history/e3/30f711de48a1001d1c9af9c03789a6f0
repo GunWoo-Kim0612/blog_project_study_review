@@ -1,0 +1,5 @@
+package com.gwk.review.controller.user;
+
+public class UserController {
+
+}
