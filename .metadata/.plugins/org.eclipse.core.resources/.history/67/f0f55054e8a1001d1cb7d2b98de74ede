@@ -1,0 +1,7 @@
+package com.gwk.review.auth;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public class PrincipalDetailsService implements UserDetailsService{
+	
+}

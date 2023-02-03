@@ -1,0 +1,28 @@
+package com.gwk.review.auth;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.gwk.review.model.User;
+import com.gwk.review.repository.UserRepository;
+
+public class PrincipalDetailsService implements UserDetailsService {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		
+		//username을 받아와 DB에 있는지 확인할것. 해당 메소드필요
+		User principal = userRepository.findByUsername(username).orElseThrow(()->{
+			return UsernameNotFoundException("해당 사용자를 찾을수 없습니다." + username);
+		}
+				
+		return null;
+	}
+
+}

@@ -1,0 +1,11 @@
+package com.gwk.review.filter;
+
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+public class UsernamePasswordFilter extends UsernamePasswordAuthenticationFilter{
+
+	private void sysout() {
+		// TODO Auto-generated method stub
+	
+	}
+}

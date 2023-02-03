@@ -1,0 +1,8 @@
+package com.gwk.review.auth;
+
+
+public interface AuthenticationManager extends org.springframework.security.authentication.AuthenticationManager {
+
+
+	
+}

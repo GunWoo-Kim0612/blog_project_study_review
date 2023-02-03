@@ -1,0 +1,20 @@
+package com.gwk.review.auth;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class PrincipalDetailsService implements UserDetailsService {
+
+	// 스프링이 로그인 요청을 가로챌 때 username, password 변수 두개를 가로채는데
+	// password 부분처리는 알아서함....?
+	// username이 DB에 있는지만 확인해주면됨.
+	// 그걸 이함수가해줌
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+
+		return null;
+	}
+
+}

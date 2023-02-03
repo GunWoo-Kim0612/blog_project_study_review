@@ -1,0 +1,5 @@
+package com.gwk.review.controller.api;
+
+public class BoardApiController {
+
+}

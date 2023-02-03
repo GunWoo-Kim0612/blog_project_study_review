@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+<typeInfo handle="=demo/C:\/Users\/gwk06\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.7.7\/spring-data-jpa-2.7.7.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/2.7.7=/=/maven.scope=/compile=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1674271350150"/>
+<typeInfo handle="=demo/C:\/Users\/gwk06\/.m2\/repository\/org\/springframework\/security\/spring-security-core\/5.7.6\/spring-security-core-5.7.6.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.security=/=/maven.artifactId=/spring-security-core=/=/maven.version=/5.7.6=/=/maven.scope=/compile=/&lt;org.springframework.security.authentication(AuthenticationManager.class[AuthenticationManager" modifiers="1537" timestamp="1672811016026"/>
+</typeInfoHistroy>

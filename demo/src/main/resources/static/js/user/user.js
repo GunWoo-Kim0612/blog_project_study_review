@@ -3,7 +3,8 @@ let index = {
 		init: function() {
 			$("#btn-save").on("click", () =>{
 				this.save();
-			});
+			})
+			
 		},
 		
 		save: function() {
@@ -23,9 +24,10 @@ let index = {
 				url:"/auth/joinProc",
 				data:JSON.stringify(data),				// 자바스크립트 오브젝트를 json으로 변환
 				contentType:"application/json; charset-utf-8",
-				dataType:"json"				// dataType이 json일 경우 서버로 요청을한후 응답이 왔을때
+				dataType:"text"				// dataType이 json일 경우 서버로 요청을한후 응답이 왔을때  
 											// 기본적으로 문자열, (생긴게 json이라면 )
 											// =>javascript 오브젝트로 변경해줌
+											// json -> text
 			}	
 			).done(function(res) {
 				console.log(res);
@@ -42,6 +44,7 @@ let index = {
 			}
 			);
 		},
+		
 };
 
 

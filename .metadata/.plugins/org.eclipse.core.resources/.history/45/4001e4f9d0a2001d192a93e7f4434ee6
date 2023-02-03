@@ -1,0 +1,9 @@
+package com.gwk.review.auth;
+
+import javax.naming.AuthenticationException;
+
+import org.springframework.security.core.Authentication;
+
+public interface AuthenticationManager {
+	AuthenticationManager authenticate(Authentication authentication) throws AuthenticationException;
+}

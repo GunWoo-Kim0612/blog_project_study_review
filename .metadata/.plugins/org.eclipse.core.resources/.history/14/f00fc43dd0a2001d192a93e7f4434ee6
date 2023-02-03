@@ -1,0 +1,6 @@
+package com.gwk.review.auth;
+
+public class AuthenticationManager {
+
+	
+}

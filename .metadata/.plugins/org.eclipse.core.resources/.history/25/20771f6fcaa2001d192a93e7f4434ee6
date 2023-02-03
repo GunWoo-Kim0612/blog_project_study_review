@@ -1,0 +1,9 @@
+package com.gwk.review.filter;
+
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+public class UsernamePasswordFilter extends UsernamePasswordAuthenticationFilter{
+
+	System.out.println("사용중");
+
+}
