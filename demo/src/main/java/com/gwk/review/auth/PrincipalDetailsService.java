@@ -27,7 +27,6 @@ public class PrincipalDetailsService implements UserDetailsService {
 			return new UsernameNotFoundException("해당 사용자를 찾을수 없습니다." + username);
 		});
 		System.out.println("UserRepository : 네이밍쿼리 실행 select * from user where username = " + username);
-		System.out.println("User 객체 생성, type : " + principal.getClass());
 		System.out.println("User 객체를 PrincipalDeatils에 담아 리턴");
 		
 		//해당 username이 있다면 UserDetails에 담아줌  --> 시큐리티 세션에 유저정보가 저장됨 타입은 UserDetails

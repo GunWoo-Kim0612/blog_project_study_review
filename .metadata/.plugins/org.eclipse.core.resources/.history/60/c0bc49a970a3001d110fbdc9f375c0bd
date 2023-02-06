@@ -1,0 +1,5 @@
+package com.gwk.review.dto;
+
+public class LoginRequestDto {
+
+}

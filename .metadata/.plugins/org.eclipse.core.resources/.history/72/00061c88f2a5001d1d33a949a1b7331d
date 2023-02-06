@@ -1,0 +1,39 @@
+package com.gwk.review.controller;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.gwk.review.auth.PrincipalDeatils;
+
+@Controller
+public class UserController {
+	
+	@GetMapping("/")
+	public String home(@AuthenticationPrincipal PrincipalDeatils principal) {
+		System.out.println("메인페이지이동");
+		return "index";
+	}
+	
+	@GetMapping("/auth/joinForm")
+	public String joinForm() {
+		System.out.println("joinForm 이동");
+		return "/user/joinForm";
+	}
+	
+	@GetMapping("/auth/loginForm")
+	public String loginForm() {
+		System.out.println("joinForm 이동");
+		return "/user/loginForm";
+	}
+	
+	@GetMapping("user")
+	public String user(Authentication authentication) {
+		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
+		System.out.println("principal : " + principal.getUser().getId());
+		System.out.println("principal : " + principal.getUser().getUsername());
+		System.out.println("principal : " + principal.getUser().getPassword());
+
+		return "<h1>user</h1>";
+	}
+}

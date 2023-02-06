@@ -1,0 +1,92 @@
+package com.gwk.review.auth.filter;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Date;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gwk.review.auth.PrincipalDeatils;
+import com.gwk.review.dto.LoginRequestDto;
+import com.gwk.review.model.User;
+
+import lombok.RequiredArgsConstructor;
+
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+		this.setFilterProcessesUrl("/auth/loginProc");
+	}
+
+	// Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
+	// 인증 요청시에 실행되는 함수 => /login
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws AuthenticationException {
+		
+		System.out.println("JwtAuthenticationFilter : 진입");
+
+		ObjectMapper om = new ObjectMapper();
+		LoginRequestDto loginRequestDto = null;
+
+		try {
+			loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
+			System.out.println("readValue : " + request.getInputStream());
+			System.out.println("loginRequestDto.getClass() : " + LoginRequestDto.class);
+			System.out.println(loginRequestDto);
+
+			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+					loginRequestDto.getUsername(), loginRequestDto.getPassword());
+
+			System.out.println("authenticationToken : " + authenticationToken);
+			
+			Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
+			return authentication;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
+
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		System.out.println("Authentication 객체 생성 성공");
+		System.out.println("authResult : " + authResult);
+		
+		PrincipalDeatils principalDetails  = (PrincipalDeatils) authResult.getPrincipal();
+		
+		String jwtString = JWT.create()
+				.withSubject("my토큰")
+				.withExpiresAt(new Date(System.currentTimeMillis()+(1000*60*10)))	// 10분
+				.withClaim("id", principalDetails.getUser().getId())
+				.withClaim("username", principalDetails.getUser().getUsername())
+				.sign(Algorithm.HMAC256("gwk"));	
+		
+		super.successfulAuthentication(request, response, chain, authResult);
+	}
+
+}

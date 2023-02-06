@@ -1,0 +1,91 @@
+package com.gwk.review.auth.filter;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gwk.review.auth.PrincipalDeatils;
+import com.gwk.review.dto.LoginRequestDto;
+
+import lombok.RequiredArgsConstructor;
+
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
+		this.authenticationManager = authenticationManager;
+		this.setFilterProcessesUrl("/auth/loginProc");
+	}
+
+	// Authentication 객체 만들어서 리턴 => 의존 : AuthenticationManager
+	// 인증 요청시에 실행되는 함수 => /login
+	@Override
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+			throws AuthenticationException {
+
+		System.out.println("JwtAuthenticationFilter : 진입");
+
+		System.out.println("버퍼확인");
+
+		try {
+			InputStream inputStream = request.getInputStream();
+			if (inputStream != null) {
+
+				BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,"enc-kr"));
+				String input = null;
+
+				while ((input = br.readLine()) != null) {
+					System.out.println(input);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		ObjectMapper om = new ObjectMapper();
+		LoginRequestDto loginRequestDto = null;
+		
+		try {
+			loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
+			System.out.println("readValue : " + request.getInputStream());
+			System.out.println("loginRequestDto.getClass() : " + loginRequestDto.getClass());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		UsernamePasswordAuthenticationToken authenticationToken = 
+				new UsernamePasswordAuthenticationToken(
+						loginRequestDto.getUsername(), 
+						loginRequestDto.getPassword());
+		
+		Authentication authentication = 
+				authenticationManager.authenticate(authenticationToken);
+
+		return authentication;
+
+	}
+
+	@Override
+	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
+			Authentication authResult) throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		super.successfulAuthentication(request, response, chain, authResult);
+	}
+
+}

@@ -6,7 +6,7 @@
 
 <div class="container">
 	<h2>로그인</h2>
-	<form action="/auth/loginProc" method="post">
+	<form>
 		<div class="form-group">
 			<label for="username">UserName:</label> <input type="text"
 				class="form-control" id="username" placeholder="Enter username"
@@ -17,14 +17,15 @@
 				class="form-control" id="password" placeholder="Enter password"
 				name="password">
 		</div>
-		<button id="btn-login" class="btn btn-primary">로그인</button>
 		<a
 			href="https://kauth.kakao.com/oauth/authorize?client_id=8e850b343748a7c248cff773f99c2b16&redirect_uri=http://localhost:8080/auth/kakao/callback&response_type=code
 			"><img
 			src="/image/kakao_login.png" height="38px" width="74px"></img> </a>
 	</form>
+		<button id="btn-login" class="btn btn-primary">로그인</button>
 </div>
 
+<script src="/js/user/user.js"></script>
 
 
 <%@ include file="../layout/footer.jsp"%>

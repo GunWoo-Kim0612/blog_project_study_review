@@ -17,7 +17,7 @@ public class PrincipalDeatils implements UserDetails {
 	
 	//User 객체를 가져오고
 	public PrincipalDeatils(User user) {
-		System.out.println("User전달받아  PrincipalDedails객체 생성" );
+//		System.out.println("User전달받아  PrincipalDedails객체 생성" );
 		this.user = user;
 	}
 	
